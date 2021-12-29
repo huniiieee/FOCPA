@@ -142,6 +142,10 @@
     <ClInclude Include="Aes_Sbox_Table.h" />
     <ClInclude Include="Analysis.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="First_Order_CPA.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

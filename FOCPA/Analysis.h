@@ -14,16 +14,16 @@
 *평문 이름
 */
 
-#define Folder_Path " "
-#define Trace_Path " "
-#define Plain_Path " "
+#define Folder_Path "C:\\Users\\sehoon\\chipwhisperer\\projects\\tmp\\default_data\\traces"
+#define Trace_Path "2021.12.29-13.19.51-2021.12.29-13.19.51_500tr_2000pt"
+#define Plain_Path "2021.12.29-13.19.51-2021.12.29-13.19.51_500tr_2000pt_plain"
 
 /*
 * 중간값 설정
 * 0: AddRoundkey 이후
 * 1: SubBytes 이후
 */
-#define Mid_Value 0
+#define Mid_Value 1
 
 
 /*
@@ -37,15 +37,17 @@
 * 분석할 파형 수 
 * 분석 시작 포인트 수 
 * 분석 종료 포인트 수
+* 총 분석 포인트 수
 */
-#define Trace_Num 100
-#define Start_Point 100
-#define End_Point 1000
+#define Trace_Num 500
+#define Start_Point 1
+#define End_Point 2000
+#define Point_Num 2000
 
 /*
 * 최종 후보키 개수
 */
-#define Candidates
+#define Candidates 3
 
 /*
 * 키 추측 시작 키
@@ -53,6 +55,7 @@
 */
 #define Guess_Key_Start 0
 #define Guess_Key_End 256
+#define Guess_Key_Num 256
 
 /*
 * 추측 키들의 상관계수 출력 유무
@@ -83,9 +86,11 @@ typedef struct{
 	unsigned char strEND[4];
 } Trace_Header;
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <time.h>
 #include <math.h>
 #include <direct.h>
@@ -94,8 +99,9 @@ typedef struct{
 #define _PASS_				1
 #define _FAIL_				0
 
+typedef uint8_t byte;
 int Log(struct tm* TIME, __int64 START_TIME, __int64 END_TIME);
 int Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
-int First_Order_CPA(struct tm* TIME, unsigned int POINTS, unsigned int TRACE_NUM);
+void First_Order_CPA(FILE* pt, FILE* trace);
 
 #endif
