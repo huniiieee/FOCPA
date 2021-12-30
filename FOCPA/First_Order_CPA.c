@@ -4,8 +4,6 @@
 
 void First_Order_CPA(FILE* pt, FILE* trace)
 {
-
-
 	__int64 * HW_BYTES=NULL;
 	__int64 * HWW_BYTES=NULL;
 
@@ -27,33 +25,10 @@ void First_Order_CPA(FILE* pt, FILE* trace)
 	for (unsigned int i = 0; i < Guess_Key_Num; i++)
 		HW_TR[i] = (double*)malloc((unsigned int)Point_Num * sizeof(double));
 
-
-
-	////Hamming_weight 중간값(X)
-	//__int64 *HW_BYTES[Guess_Key_Num] = { 0, };
-
-	////Hamming_weight 중간값(X^2)
-	//__int64 HWW_BYTES[Guess_Key_Num] = { 0, };
-
-	////Trace 전력 소비값(Y)
-	//double TR_POINTS[Point_Num] = { 0. , };
-
-	////Trace 전력 소비값(Y^2)
-	//double TRR_POINTS[Point_Num] = { 0. , };
-
-
-	////XY값
-	//double HW_TR[Guess_Key_Num][Point_Num] = { 0. , };
-
-	////Max_Correlation
-	//double Max[Guess_Key_Num] = { 0. , };
-
 	byte pt_one_byte = 0;
 	unsigned int hw = 0;
 
 	float F_Temp;
-	//double Temp_Points[Point_Num] = { 0.0, };
-
 	int mid = 0;
 	double corr_m = 0.;
 	double corr_d = 0.;
@@ -101,9 +76,12 @@ void First_Order_CPA(FILE* pt, FILE* trace)
 			}
 			for (__int64 guess_key = Guess_Key_Start; guess_key < Guess_Key_End; guess_key++)
 			{
+#if Mid_Value
 				mid = SBox[pt_one_byte ^ guess_key];
+#else
+				mid = pt_ond_byte ^ guess_key;
+#endif
 				hw = (mid & 1) + ((mid >> 1) & 1) + ((mid >> 2) & 1) + ((mid >> 3) & 1) + ((mid >> 4) & 1) + ((mid >> 5) & 1) + ((mid >> 6) & 1) + ((mid >> 7) & 1);
-
 				HW_BYTES[guess_key] += (__int64) hw;
 				HWW_BYTES[guess_key] += (__int64)(hw * hw);
 				for (__int64 point = 0; point < Point_Num; point++)
@@ -140,6 +118,6 @@ void First_Order_CPA(FILE* pt, FILE* trace)
 
 		}
 
-		printf("%d번 째 byte의 후보키는 %d이고, max_correlation=%f\n", _byte_, key_can, max_key);
+		printf("%d번 째 byte의 후보키는 %02X이고, max_correlation=%f\n", _byte_, key_can, max_key);
 	}
 }

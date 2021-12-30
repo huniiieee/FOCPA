@@ -15,8 +15,8 @@
 */
 
 #define Folder_Path "C:\\Users\\leesehun\\chipwhisperer\\projects\\tmp\\default_data\\traces"
-#define Trace_Path "2021.12.30-10.38.13-2021.12.30-10.38.13_50tr_8648pt"
-#define Plain_Path "2021.12.30-10.38.13-2021.12.30-10.38.13_50tr_8648pt_plain"
+#define Trace_Path "2021.12.30-16.41.01-2021.12.30-16.41.01_1000tr_9224pt"
+#define Plain_Path "2021.12.30-16.41.01-2021.12.30-16.41.01_1000tr_9224pt_plain"
 
 /*
 * 중간값 설정
@@ -39,10 +39,10 @@
 * 분석 종료 포인트 수
 * 총 분석 포인트 수
 */
-#define Trace_Num 50
+#define Trace_Num 1000
 #define Start_Point 1
-#define End_Point 8648
-#define Point_Num 8648
+#define End_Point 9224	
+#define Point_Num 9224
 
 /*
 * 최종 후보키 개수
