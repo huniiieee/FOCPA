@@ -26,7 +26,6 @@ int main()
 		printf(" -----------------------------------------------------------------------\n");
 		return _FAIL_;
 	}
-
 	First_Order_CPA(fpp, fpt);
 
 	fclose(fpp);

@@ -107,7 +107,7 @@ void First_Order_CPA(FILE* pt, FILE* trace)
 				HW_BYTES[guess_key] += (__int64) hw;
 				HWW_BYTES[guess_key] += (__int64)(hw * hw);
 				for (__int64 point = 0; point < Point_Num; point++)
-					HW_TR[guess_key][point] += guess_key * Temp_Points[point];
+					HW_TR[guess_key][point] += (double)hw * Temp_Points[point];
 			}
 		}
 
@@ -117,11 +117,15 @@ void First_Order_CPA(FILE* pt, FILE* trace)
 			max_cor = 0.0;
 			for (__int64 point = 0; point < Point_Num; point++)
 			{
-				corr_m = (double)Trace_Num * (double)HW_TR[guess_key][point] - (double)HW_BYTES[guess_key] * (double)TR_POINTS[point];
-				corr_d = ((double)Trace_Num * (double)HWW_BYTES[guess_key] - (double)HW_BYTES[guess_key] * (double)HW_BYTES[guess_key]) * ((double)Trace_Num * (double)TRR_POINTS[point] - (double)TR_POINTS[point] * (double)TR_POINTS[point]);
-				corr_d = sqrt(corr_d);
-
-				corr = corr_m / corr_d;
+				corr_m = (double)Trace_Num * HW_TR[guess_key][point] - (double)HW_BYTES[guess_key] * TR_POINTS[point];
+				corr_d = ((double)Trace_Num * (double)HWW_BYTES[guess_key] - (double)HW_BYTES[guess_key] * (double)HW_BYTES[guess_key]) * ((double)Trace_Num * TRR_POINTS[point] - TR_POINTS[point] * TR_POINTS[point]);
+				if (corr_d <= (double)0)
+					corr = 0.0;
+				else
+				{
+					corr = corr_m / sqrt(corr_d);
+					corr = fabs(corr);
+				}
 				if (corr > max_cor)
 				{
 					max_cor = corr;

@@ -14,9 +14,9 @@
 *평문 이름
 */
 
-#define Folder_Path "C:\\Users\\sehoon\\chipwhisperer\\projects\\tmp\\default_data\\traces"
-#define Trace_Path "2021.12.29-13.19.51-2021.12.29-13.19.51_500tr_2000pt"
-#define Plain_Path "2021.12.29-13.19.51-2021.12.29-13.19.51_500tr_2000pt_plain"
+#define Folder_Path "C:\\Users\\leesehun\\chipwhisperer\\projects\\tmp\\default_data\\traces"
+#define Trace_Path "2021.12.30-10.38.13-2021.12.30-10.38.13_50tr_8648pt"
+#define Plain_Path "2021.12.30-10.38.13-2021.12.30-10.38.13_50tr_8648pt_plain"
 
 /*
 * 중간값 설정
@@ -39,10 +39,10 @@
 * 분석 종료 포인트 수
 * 총 분석 포인트 수
 */
-#define Trace_Num 500
+#define Trace_Num 50
 #define Start_Point 1
-#define End_Point 2000
-#define Point_Num 2000
+#define End_Point 8648
+#define Point_Num 8648
 
 /*
 * 최종 후보키 개수
