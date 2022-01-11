@@ -41,7 +41,7 @@
 */
 #define Trace_Num 1000
 #define Start_Point 1
-#define End_Point 9224	
+#define End_Point 9224
 #define Point_Num 9224
 
 /*

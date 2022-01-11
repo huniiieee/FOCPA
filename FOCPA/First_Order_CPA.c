@@ -65,16 +65,17 @@ void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 		{
 			fscanf_s(pt, "%hhx", &pt_one_byte);
 			_fseeki64(pt, (__int64)(Byte_Num-1) * (__int64)3 + (__int64)2, SEEK_CUR);
-
+			
 			for (__int64 point = 0; point < Point_Num; point++)
 			{
 				fread(&F_Temp, sizeof(float), 1, trace);
-				_fseeki64(trace, ((__int64)Total_Point-(__int64)End_Point+(__int64)Start_Point-(__int64)1) * (__int64)4, SEEK_CUR);
 				Temp_Points[point] = (double)F_Temp;
 
 				TR_POINTS[point] += Temp_Points[point];
 				TRR_POINTS[point] += Temp_Points[point] * Temp_Points[point];
 			}
+			_fseeki64(trace, ((__int64)Total_Point - (__int64)End_Point + (__int64)Start_Point - (__int64)1) * (__int64)4, SEEK_CUR);
+
 			for (__int64 guess_key = Guess_Key_Start; guess_key < Guess_Key_End; guess_key++)
 			{
 #if Mid_Value
@@ -121,4 +122,18 @@ void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 
 		printf("%d번 째 byte의 후보키는 %02X이고, max_correlation=%f\n", _byte_, key_can, max_key);
 	}
+
+	free(HW_BYTES);
+	free(HWW_BYTES);
+	free(TR_POINTS);
+	free(TRR_POINTS);
+	free(Max);
+	free(Temp_Points);
+	for (unsigned int i = 0; i < Guess_Key_Num; i++)
+		free(HW_TR[i]);
+	free(HW_TR);
+
+
+
+
 }
