@@ -2,7 +2,7 @@
 #include "Aes_Sbox_Table.h"
 
 
-void First_Order_CPA(FILE* pt, FILE* trace)
+void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 {
 	__int64 * HW_BYTES=NULL;
 	__int64 * HWW_BYTES=NULL;
@@ -69,6 +69,7 @@ void First_Order_CPA(FILE* pt, FILE* trace)
 			for (__int64 point = 0; point < Point_Num; point++)
 			{
 				fread(&F_Temp, sizeof(float), 1, trace);
+				_fseeki64(trace, ((__int64)Total_Point-(__int64)End_Point+(__int64)Start_Point-(__int64)1) * (__int64)4, SEEK_CUR);
 				Temp_Points[point] = (double)F_Temp;
 
 				TR_POINTS[point] += Temp_Points[point];

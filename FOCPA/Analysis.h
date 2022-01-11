@@ -101,7 +101,7 @@ typedef struct{
 
 typedef uint8_t byte;
 int Log(struct tm* TIME, __int64 START_TIME, __int64 END_TIME);
-int Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
-void First_Order_CPA(FILE* pt, FILE* trace);
+void Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
+void First_Order_CPA(FILE* pt, FILE* trace, unsigned int Total_Point);
 
 #endif

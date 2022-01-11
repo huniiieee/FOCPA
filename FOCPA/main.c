@@ -7,6 +7,9 @@ int main()
 	FILE* fpp = NULL;
 	FILE* fpt = NULL;
 
+	unsigned int POINTS = 0;
+	unsigned int TRACE_NUM = 0;
+
 	// 평문 파일 열기 (읽기 모드)
 	sprintf_s(FILE_MERGE, _FILE_NAME_SIZE_ * sizeof(char), "%s\\%s.txt", Folder_Path, Plain_Path);
 	fopen_s(&fpp, FILE_MERGE, "r");
@@ -26,7 +29,9 @@ int main()
 		printf(" -----------------------------------------------------------------------\n");
 		return _FAIL_;
 	}
-	First_Order_CPA(fpp, fpt);
+
+	Point_Verify(&POINTS, &TRACE_NUM);
+	First_Order_CPA(fpp, fpt,POINTS);
 
 	fclose(fpp);
 	fclose(fpt);
