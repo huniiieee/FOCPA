@@ -21,6 +21,9 @@
     <ClInclude Include="Analysis.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Aria_Sbox_Table.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="First_Order_CPA.c">
@@ -30,6 +33,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Analysis.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="First_Order_CPA_ARIA.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

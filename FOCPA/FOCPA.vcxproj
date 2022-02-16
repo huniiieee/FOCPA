@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClInclude Include="Aes_Sbox_Table.h" />
     <ClInclude Include="Analysis.h" />
+    <ClInclude Include="Aria_Sbox_Table.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Analysis.c" />
     <ClCompile Include="First_Order_CPA.c" />
+    <ClCompile Include="First_Order_CPA_ARIA.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

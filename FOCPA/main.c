@@ -31,7 +31,7 @@ int main()
 	}
 
 	Point_Verify(&POINTS, &TRACE_NUM);
-	First_Order_CPA(fpp, fpt,POINTS);
+	First_Order_CPA_ARIA(fpp,fpt,POINTS);
 
 	fclose(fpp);
 	fclose(fpt);

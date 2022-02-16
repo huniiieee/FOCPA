@@ -14,9 +14,9 @@
 *평문 이름
 */
 
-#define Folder_Path "C:\\Users\\leesehun\\chipwhisperer\\projects\\tmp\\default_data\\traces"
-#define Trace_Path "2021.12.30-16.41.01-2021.12.30-16.41.01_1000tr_9224pt"
-#define Plain_Path "2021.12.30-16.41.01-2021.12.30-16.41.01_1000tr_9224pt_plain"
+#define Folder_Path "E:\\aria_trace-20220216T044036Z-001\\aria_trace"
+#define Trace_Path "2022.02.08-10.44.06-2022.02.08-10.44.06_1000tr_2620pt"
+#define Plain_Path "2022.02.08-10.44.06-2022.02.08-10.44.06_1000tr_2620pt_plain"
 
 /*
 * 중간값 설정
@@ -39,10 +39,10 @@
 * 분석 종료 포인트 수
 * 총 분석 포인트 수
 */
-#define Trace_Num 1000
+#define Trace_Num 1
 #define Start_Point 1
-#define End_Point 9224
-#define Point_Num 9224
+#define End_Point 2620
+#define Point_Num 2620
 
 /*
 * 최종 후보키 개수
@@ -102,6 +102,7 @@ typedef struct{
 typedef uint8_t byte;
 int Log(struct tm* TIME, __int64 START_TIME, __int64 END_TIME);
 void Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
-void First_Order_CPA(FILE* pt, FILE* trace, unsigned int Total_Point);
+void First_Order_CPA_AES(FILE* pt, FILE* trace, unsigned int Total_Point);
+void First_Order_CPA_ARIA(FILE* pt,FILE* trace, unsigned int Total_Point);
 
 #endif
