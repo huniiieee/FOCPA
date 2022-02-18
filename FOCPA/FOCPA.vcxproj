@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Analysis.c" />
+    <ClCompile Include="find_aria_key.c" />
     <ClCompile Include="First_Order_CPA.c" />
     <ClCompile Include="First_Order_CPA_ARIA.c" />
     <ClCompile Include="main.c" />

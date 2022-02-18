@@ -27,8 +27,6 @@ void First_Order_CPA_ARIA(FILE* pt, FILE* trace, unsigned int Total_Point)
 	byte pt_one_byte = 0;
 	unsigned int hw = 0;
 
-	byte Ept = 0;
-	double Et = 0.;
 	float F_Temp;
 	int mid = 0;
 	double corr_m = 0.;
@@ -59,12 +57,13 @@ void First_Order_CPA_ARIA(FILE* pt, FILE* trace, unsigned int Total_Point)
 		}
 
 
-
+		_fseeki64(pt, (__int64)_byte_ * (__int64)3, SEEK_SET);
 		_fseeki64(trace, (__int64)32 + ((__int64)Start_Point - (__int64)1) * (__int64)4, SEEK_SET);
 
 		for (__int64 _trace_ = 0; _trace_ < Trace_Num; _trace_++)
 		{
-			pt_one_byte = C1[_byte_];
+			fscanf_s(pt, "%hhx", &pt_one_byte);
+			_fseeki64(pt, (__int64)(Byte_Num - 1) * (__int64)3 + (__int64)2, SEEK_CUR);
 
 			for (__int64 point = 0; point < Point_Num; point++)
 			{
@@ -95,29 +94,21 @@ void First_Order_CPA_ARIA(FILE* pt, FILE* trace, unsigned int Total_Point)
 		}
 
 		max_key = 0.0;
-		for (int i = 0; i < Guess_Key_Num; i++)
-			Ept += HW_BYTES[i];
-		Ept = Ept / 256;
-		for (int i = 0; i < Point_Num; i++)
-			Et += TR_POINTS[i];
-		Et = Et / Point_Num;
+	
 		for (__int64 guess_key = Guess_Key_Start; guess_key < Guess_Key_End; guess_key++)
 		{
 			max_cor = 0.0;
 			for (__int64 point = 0; point < Point_Num; point++)
 			{
-				corr = (HW_BYTES[guess_key]-Ept)*(TR_POINTS[point]-Et);
-				corr = fabs(corr);
-				//corr_m = (double)Trace_Num * HW_TR[guess_key][point] - (double)HW_BYTES[guess_key] * TR_POINTS[point];
-				//corr_d = ((double)Trace_Num * (double)HWW_BYTES[guess_key] - (double)HW_BYTES[guess_key] * (double)HW_BYTES[guess_key]) * ((double)Trace_Num * TRR_POINTS[point] - TR_POINTS[point] * TR_POINTS[point]);
-				//if (corr_d <= (double)0)
-				//	corr = 0.0;
-				//else
-				//{
-				//	corr = corr_m / sqrt(corr_d);
-				//	corr = fabs(corr);
-				//}
-
+				corr_m = (double)Trace_Num * HW_TR[guess_key][point] - (double)HW_BYTES[guess_key] * TR_POINTS[point];
+				corr_d = ((double)Trace_Num * (double)HWW_BYTES[guess_key] - (double)HW_BYTES[guess_key] * (double)HW_BYTES[guess_key]) * ((double)Trace_Num * TRR_POINTS[point] - TR_POINTS[point] * TR_POINTS[point]);
+				if (corr_d <= (double)0)
+					corr = 0.0;
+				else
+				{
+					corr = corr_m / sqrt(corr_d);
+					corr = fabs(corr);
+				}
 				if (corr > max_cor)
 				{
 					max_cor = corr;

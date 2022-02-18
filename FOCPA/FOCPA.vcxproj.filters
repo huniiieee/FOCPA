@@ -38,5 +38,8 @@
     <ClCompile Include="First_Order_CPA_ARIA.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="find_aria_key.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,9 +14,9 @@
 *평문 이름
 */
 
-#define Folder_Path "E:\\aria_trace-20220216T044036Z-001\\aria_trace"
-#define Trace_Path "2022.02.08-10.44.06-2022.02.08-10.44.06_1000tr_2620pt"
-#define Plain_Path "2022.02.08-10.44.06-2022.02.08-10.44.06_1000tr_2620pt_plain"
+#define Folder_Path "E:\ARIA_12Round_1000_traces"
+#define Trace_Path "2022.02.18-11.26.55-2022.02.18-11.26.55_1000tr_3000pt"
+#define Plain_Path "2022.02.18-11.26.55-2022.02.18-11.26.55_1000tr_3000pt_cipher"
 
 /*
 * 중간값 설정
@@ -39,10 +39,10 @@
 * 분석 종료 포인트 수
 * 총 분석 포인트 수
 */
-#define Trace_Num 1
+#define Trace_Num 1000
 #define Start_Point 1
-#define End_Point 2620
-#define Point_Num 2620
+#define End_Point 3000
+#define Point_Num 3000
 
 /*
 * 최종 후보키 개수
@@ -104,5 +104,5 @@ int Log(struct tm* TIME, __int64 START_TIME, __int64 END_TIME);
 void Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
 void First_Order_CPA_AES(FILE* pt, FILE* trace, unsigned int Total_Point);
 void First_Order_CPA_ARIA(FILE* pt,FILE* trace, unsigned int Total_Point);
-
+void Find_Aria_Key(byte* W0, byte* W1);
 #endif
