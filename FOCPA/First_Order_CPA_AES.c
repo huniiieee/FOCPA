@@ -79,7 +79,7 @@ void First_Order_CPA_AES(FILE* pt, FILE* trace,unsigned int Total_Point)
 			for (__int64 guess_key = Guess_Key_Start; guess_key < Guess_Key_End; guess_key++)
 			{
 #if Mid_Value
-				mid = SBox[pt_one_byte ^ guess_key];
+				mid = Aes_SBox[pt_one_byte ^ guess_key];
 #else
 				mid = pt_ond_byte ^ guess_key;
 #endif

@@ -5,7 +5,7 @@
 /*
 * 분석 가능 바이트 수
 */
-#define Byte_Num 16
+#define Byte_Num 8
 
 
 /*
@@ -14,9 +14,9 @@
 *평문 이름
 */
 
-#define Folder_Path "E:\ARIA_12Round_1000_traces"
-#define Trace_Path "2022.02.18-11.26.55-2022.02.18-11.26.55_1000tr_3000pt"
-#define Plain_Path "2022.02.18-11.26.55-2022.02.18-11.26.55_1000tr_3000pt_cipher"
+#define Folder_Path "E:\PIPO_1round"
+#define Trace_Path "2022.02.24-11.36.19-2022.02.24-11.36.19_1000tr_18780pt"
+#define Plain_Path "2022.02.24-11.36.19-2022.02.24-11.36.19_1000tr_18780pt_plain"
 
 /*
 * 중간값 설정
@@ -31,7 +31,7 @@
 * 분석 종료 바이트 
 */
 #define Start_Byte 1
-#define End_Byte 16
+#define End_Byte 8
 
 /*
 * 분석할 파형 수 
@@ -40,9 +40,9 @@
 * 총 분석 포인트 수
 */
 #define Trace_Num 1000
-#define Start_Point 1
-#define End_Point 3000
-#define Point_Num 3000
+#define Start_Point 15001
+#define End_Point 18780
+#define Point_Num 3780
 
 /*
 * 최종 후보키 개수
@@ -104,5 +104,6 @@ int Log(struct tm* TIME, __int64 START_TIME, __int64 END_TIME);
 void Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
 void First_Order_CPA_AES(FILE* pt, FILE* trace, unsigned int Total_Point);
 void First_Order_CPA_ARIA(FILE* pt,FILE* trace, unsigned int Total_Point);
+void First_Order_CPA_PIPO(FILE* pt, FILE* trace, unsigned int Total_Point);
 void Find_Aria_Key(byte* W0, byte* W1);
 #endif

@@ -32,9 +32,17 @@ int main()
 		return _FAIL_;
 	}
 
+	//ARIA
+	// 
 	//Point_Verify(&POINTS, &TRACE_NUM);
 	//First_Order_CPA_ARIA(fpp,fpt,POINTS);
-	Find_Aria_Key(W0, W1);
+	//Find_Aria_Key(W0, W1);
+
+
+	//PIPO
+	// 
+	Point_Verify(&POINTS, &TRACE_NUM);
+	First_Order_CPA_PIPO(fpp,fpt,POINTS);
 
 	fclose(fpp);
 	fclose(fpt);

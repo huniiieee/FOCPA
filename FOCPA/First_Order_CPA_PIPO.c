@@ -1,17 +1,17 @@
 #include "Analysis.h"
-#include "Aes_Sbox_Table.h"
+#include "Pipo_Sbox_Table.h"
 
 
-void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
+void First_Order_CPA_PIPO(FILE* pt, FILE* trace, unsigned int Total_Point)
 {
-	__int64 * HW_BYTES=NULL;
-	__int64 * HWW_BYTES=NULL;
+	__int64* HW_BYTES = NULL;
+	__int64* HWW_BYTES = NULL;
 
 	double* TR_POINTS = NULL;
 	double* TRR_POINTS = NULL;
 	double** HW_TR = NULL;
 	double* Max = NULL;
-	double* Temp_Points= NULL;
+	double* Temp_Points = NULL;
 
 	HW_BYTES = (__int64*)malloc(Guess_Key_Num * sizeof(__int64));
 	HWW_BYTES = (__int64*)malloc(Guess_Key_Num * sizeof(__int64));
@@ -25,7 +25,9 @@ void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 	for (unsigned int i = 0; i < Guess_Key_Num; i++)
 		HW_TR[i] = (double*)malloc((unsigned int)Point_Num * sizeof(double));
 
-	byte pt_one_byte = 0;
+	byte _pt_[8] = {0,};
+	byte T[8] = { 0, };
+	byte Key[8] = { 0, };
 	unsigned int hw = 0;
 
 	float F_Temp;
@@ -58,14 +60,22 @@ void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 		}
 
 
-		_fseeki64(pt, (__int64)_byte_* (__int64)3, SEEK_SET);
-		_fseeki64(trace, (__int64)32+((__int64)Start_Point- (__int64)1)*(__int64)4, SEEK_SET);
+
+		_fseeki64(pt, 0, SEEK_SET);
+		_fseeki64(trace, (__int64)32 + ((__int64)Start_Point - (__int64)1) * (__int64)4, SEEK_SET);
 
 		for (__int64 _trace_ = 0; _trace_ < Trace_Num; _trace_++)
 		{
-			fscanf_s(pt, "%hhx", &pt_one_byte);
-			_fseeki64(pt, (__int64)(Byte_Num-1) * (__int64)3 + (__int64)2, SEEK_CUR);
-			
+			for(int i=0;i<8;i++)
+				fscanf_s(pt, "%hhx", &_pt_[i]);
+			for (int i = 0; i < 8; i++)
+				T[i] = 0;
+			for (int i = 0; i < 8; i++)
+				for (int j = 0; j < 8; j++)
+					T[i] |= (((_pt_[j] & (1 << (7 - i))) >> (7 - i)) << (7 - j));
+
+			for (int i = 0; i < 8; i++)
+				_pt_[i] = T[i];
 			for (__int64 point = 0; point < Point_Num; point++)
 			{
 				fread(&F_Temp, sizeof(float), 1, trace);
@@ -78,20 +88,21 @@ void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 
 			for (__int64 guess_key = Guess_Key_Start; guess_key < Guess_Key_End; guess_key++)
 			{
-#if Mid_Value
-				mid = SBox[pt_one_byte ^ guess_key];
-#else
-				mid = pt_ond_byte ^ guess_key;
-#endif
+				/*for (int i = 0; i < 8; i++)
+				{
+					_pt_[i] = _pt_[i] ^ (((guess_key >> (7 - i)) & 1) << (7 - _byte_));
+				}*/
+
+				mid = Pipo_SBox[_pt_[_byte_]^guess_key];
 				hw = (mid & 1) + ((mid >> 1) & 1) + ((mid >> 2) & 1) + ((mid >> 3) & 1) + ((mid >> 4) & 1) + ((mid >> 5) & 1) + ((mid >> 6) & 1) + ((mid >> 7) & 1);
-				HW_BYTES[guess_key] += (__int64) hw;
+				HW_BYTES[guess_key] += (__int64)hw;
 				HWW_BYTES[guess_key] += (__int64)(hw * hw);
 				for (__int64 point = 0; point < Point_Num; point++)
 					HW_TR[guess_key][point] += (double)hw * Temp_Points[point];
 			}
 		}
 
-		max_key = 0.0 ;
+		max_key = 0.0;
 		for (__int64 guess_key = Guess_Key_Start; guess_key < Guess_Key_End; guess_key++)
 		{
 			max_cor = 0.0;
@@ -121,7 +132,17 @@ void First_Order_CPA(FILE* pt, FILE* trace,unsigned int Total_Point)
 		}
 
 		printf("%d번 째 byte의 후보키는 %02X이고, max_correlation=%f\n", _byte_, key_can, max_key);
+		Key[_byte_] = key_can;
 	}
+	for (int i = 0; i < 8; i++)
+		T[i] = 0;
+	for (int i = 0; i < 8; i++)
+		for (int j = 0; j < 8; j++)
+			T[i] |= (((Key[j] & (1 << (7 - i))) >> (7 - i)) << (7 - j));
+
+	printf("\n Key[1]==");
+	for (int i = 0; i < 8; i++)
+		printf("%02x ", T[i]);
 
 	free(HW_BYTES);
 	free(HWW_BYTES);
