@@ -2,7 +2,7 @@
 #include "Pipo_Sbox_Table.h"
 
 
-void First_Order_CPA_PIPO(FILE* pt, FILE* trace, unsigned int Total_Point)
+void First_Order_CPA_PIPO_TLU(FILE* pt, FILE* trace, unsigned int Total_Point)
 {
 	__int64* HW_BYTES = NULL;
 	__int64* HWW_BYTES = NULL;
@@ -153,8 +153,4 @@ void First_Order_CPA_PIPO(FILE* pt, FILE* trace, unsigned int Total_Point)
 	for (unsigned int i = 0; i < Guess_Key_Num; i++)
 		free(HW_TR[i]);
 	free(HW_TR);
-
-
-
-
 }

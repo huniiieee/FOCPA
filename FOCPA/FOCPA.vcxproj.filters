@@ -44,7 +44,10 @@
     <ClCompile Include="find_aria_key.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="First_Order_CPA_PIPO.c">
+    <ClCompile Include="First_Order_CPA_PIPO_TLU.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="First_Order_CPA_PIPO_BS.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

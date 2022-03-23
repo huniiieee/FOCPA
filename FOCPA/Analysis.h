@@ -14,9 +14,12 @@
 *평문 이름
 */
 
-#define Folder_Path "E:\PIPO_1round"
-#define Trace_Path "2022.02.24-11.36.19-2022.02.24-11.36.19_1000tr_18780pt"
-#define Plain_Path "2022.02.24-11.36.19-2022.02.24-11.36.19_1000tr_18780pt_plain"
+#define Folder_Path "E:\\PIPO_1round_BS"
+#define Trace_Path "2022.03.22-10.25.28-2022.03.22-10.25.28_2000tr_1644pt"
+#define Plain_Path "2022.03.22-10.25.28-2022.03.22-10.25.28_2000tr_1644pt_plain"
+
+
+
 
 /*
 * 중간값 설정
@@ -39,10 +42,10 @@
 * 분석 종료 포인트 수
 * 총 분석 포인트 수
 */
-#define Trace_Num 1000
-#define Start_Point 15001
-#define End_Point 18780
-#define Point_Num 3780
+#define Trace_Num 2000
+#define Start_Point 1
+#define End_Point 1644
+#define Point_Num 1644
 
 /*
 * 최종 후보키 개수
@@ -104,6 +107,7 @@ int Log(struct tm* TIME, __int64 START_TIME, __int64 END_TIME);
 void Point_Verify(unsigned int* POINTS, unsigned int* TRACE_NUM);
 void First_Order_CPA_AES(FILE* pt, FILE* trace, unsigned int Total_Point);
 void First_Order_CPA_ARIA(FILE* pt,FILE* trace, unsigned int Total_Point);
-void First_Order_CPA_PIPO(FILE* pt, FILE* trace, unsigned int Total_Point);
+void First_Order_CPA_PIPO_TLU(FILE* pt, FILE* trace, unsigned int Total_Point);
+void First_Order_CPA_PIPO_BS(FILE* pt, FILE* trace, unsigned int Total_Point);
 void Find_Aria_Key(byte* W0, byte* W1);
 #endif

@@ -39,11 +39,11 @@ int main()
 	//Find_Aria_Key(W0, W1);
 
 
-	//PIPO
+	//PIPO_TLU & BS
 	// 
 	Point_Verify(&POINTS, &TRACE_NUM);
-	First_Order_CPA_PIPO(fpp,fpt,POINTS);
-
+	//First_Order_CPA_PIPO_TLU(fpp,fpt,POINTS);
+	First_Order_CPA_PIPO_BS(fpp,fpt,POINTS);
 	fclose(fpp);
 	fclose(fpt);
 	return 0;
